@@ -10,16 +10,20 @@ export const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const updateGoodFeedback = () => {
-    setGood(prevGood => prevGood + 1);
-  };
-
-  const updateNeutralFeedback = () => {
-    setNeutral(prevNeutral => prevNeutral + 1);
-  };
-
-  const updateBadFeedback = () => {
-    setBad(prevBad => prevBad + 1);
+  const updateFeedback = option => {
+    switch (option) {
+      case 'good':
+        setGood(prevGood => prevGood + 1);
+        break;
+      case 'neutral':
+        setNeutral(prevNeutral => prevNeutral + 1);
+        break;
+      case 'bad':
+        setBad(prevBad => prevBad + 1);
+        break;
+      default:
+        break;
+    }
   };
 
   const countTotalFeedback = () => {
@@ -40,9 +44,8 @@ export const App = () => {
     <div className="general-container">
       <Section title="Please, leave your feedback">
         <FeedbackOptions
-          onLeaveGoodFeedback={updateGoodFeedback}
-          onLeaveNeutralFeedback={updateNeutralFeedback}
-          onLeaveBadFeedback={updateBadFeedback}
+          options={['good', 'neutral', 'bad']}
+          onLeaveFeedback={updateFeedback}
         />
       </Section>
 
